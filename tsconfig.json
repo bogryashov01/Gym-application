@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "dist",
+    "strict": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx"
+  },
+  "lib": [
+    "esnext"
+  ],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.jsx"
+  ],
+  "exclude": [
+    "dist"
+  ],
+  "extends": "expo/tsconfig.base"
+}
