@@ -1,25 +1,30 @@
 // Modules
 import { TextInput, StyleSheet } from "react-native";
 interface Props {
+  colorScheme: any;
   onChange: ((text: string) => void) | undefined;
   value: string;
+  onSubmitEditing: ()=> void,
 }
 
-const SearchInput: React.FC<Props> = ({ onChange, value }) => {
+const SearchInput: React.FC<Props> = ({ colorScheme, onChange, value, onSubmitEditing }) => {
   return (
     <TextInput
       value={value}
-      style={styles.SearchInput}
+      style={styles(colorScheme).SearchInput}
+      placeholderTextColor={colorScheme === "dark" ? "#fff" : "#000"}
       onChangeText={onChange}
+      onSubmitEditing={onSubmitEditing}
       placeholder="Search exercise for gym or rehabitation"
-      keyboardType="numeric"
+      keyboardType="ascii-capable"
     />
   );
 };
 
-const styles = StyleSheet.create({
+const styles = (colorScheme: string) => StyleSheet.create({
   SearchInput: {
     marginLeft: 15,
+    color: colorScheme === "dark" ? "#fff" : "#000",
   },
 });
 
