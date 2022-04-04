@@ -4,7 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 // Actions
 import asyncActions from "./async-actions";
 
-const { getRehabillitationsAsync } = asyncActions;
+const { getRehabillitationsAsync, getFilteredRehabillitationAsync } =
+  asyncActions;
 
 const initialState = {
   rehabillitations: [],
@@ -35,7 +36,23 @@ const rehabillitationTabSlice = createSlice({
       )
       .addCase(getRehabillitationsAsync.rejected, (state) => {
         state.pending = false;
-      });
+      })
+      .addCase(
+        getFilteredRehabillitationAsync.pending,
+        (state: { pending: boolean }) => {
+          state.pending = true;
+        }
+      )
+      .addCase(
+        getFilteredRehabillitationAsync.fulfilled,
+        (
+          state: { pending: boolean; rehabillitations: Array<any>[any] },
+          action
+        ) => {
+          state.pending = false;
+          state.rehabillitations = action.payload;
+        }
+      );
   },
 });
 

@@ -15,18 +15,19 @@ function SearchInputContainer() {
   const dispatch = useDispatch();
 
   const onSearchInputChange = (e: any) => {
-    setValue(e?.target?.value);
+    setValue(e);
   };
-  // const onSubmitEditing = () => {
-  //   dispatch(AsyncActions.getFilteredRehabillitationAsync)
-  // }
+  const onSubmitEditing = () => {
+    dispatch(AsyncActions.getFilteredRehabillitationAsync(value))
+    console.log(value, 'value')
+  }
 
   return (
     <SearchInput
       colorScheme={colorScheme}
       value={value}
       onChange={onSearchInputChange}
-      onSubmitEditing={()=>{console.log('ololo')}}
+      onSubmitEditing={onSubmitEditing}
     />
   );
 }

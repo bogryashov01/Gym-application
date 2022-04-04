@@ -1,7 +1,7 @@
 // Modules
 import { TextInput, StyleSheet } from "react-native";
 interface Props {
-  colorScheme: string;
+  colorScheme: any;
   onChange: ((text: string) => void) | undefined;
   value: string;
   onSubmitEditing: ()=> void,

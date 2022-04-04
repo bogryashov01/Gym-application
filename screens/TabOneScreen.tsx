@@ -13,7 +13,7 @@ import rehabillitationTabSelectors from "../engine/rehabilitation/selectors";
 
 function TabOneScreen({}: RootTabScreenProps<"Rehabitation">) {
   const dispatch = useDispatch();
-  const rehabilitationExercises = useSelector(rehabillitationTabSelectors.rehabillitations);
+  const rehabilitationExercises = useSelector( rehabillitationTabSelectors.rehabillitations );
 
   useEffect(() => {
     dispatch(AsyncActions.getRehabillitationsAsync());
@@ -45,8 +45,7 @@ function TabOneScreen({}: RootTabScreenProps<"Rehabitation">) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#52D2C3",
-    height:'100%',
-
+    height: "100%",
   },
   title: {
     fontSize: 20,
@@ -57,19 +56,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#52D2C3",
+    height: "100%",
   },
   exercise: {
     marginTop: 10,
     padding: 20,
     display: "flex",
     justifyContent: "space-between",
-    flexDirection: 'row',
+    flexDirection: "row",
   },
-  // separator: {
-  //   marginVertical: 30,
-  //   height: 1,
-  //   width: "80%",
-  // },
 });
 
 export default TabOneScreen;

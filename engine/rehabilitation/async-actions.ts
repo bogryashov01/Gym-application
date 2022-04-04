@@ -53,30 +53,31 @@ const getRehabillitationsAsync = createAsyncThunk(
   }
 );
 
-// const getFilteredRehabillitationAsync = createAsyncThunk(
-//   "rehabillitation/filter-rehabillitation",
-//   async ({ name }, { rejectWithValue }) => {
-//     return new Promise((res) => {
-//       setTimeout(() => {
-//         res(
-//           mockExercise.filter((exercise) => {
-//             if (name === "") {
-//               return exercise;
-//             } else if (
-//               exercise.name.toLowerCase().includes(name.toLowerCase())
-//             ) {
-//               return exercise;
-//             }
-//           })
-//         );
-//       }, 100);
-//     }).then((res) => res);
-//   }
-// );
+const getFilteredRehabillitationAsync = createAsyncThunk(
+  "rehabillitation/filter-rehabillitation",
+  async (name: any) => {
+    return new Promise((res) => {
+      setTimeout(() => {
+        res(
+          mockExercise.filter((exercise) => {
+            if (name === "") {
+              return exercise;
+            } else if (
+              exercise.name.toLowerCase().includes(name.toLowerCase())
+            ) {
+              return exercise;
+            }
+          })
+        );
+        console.log(res, "res");
+      }, 100);
+    }).then((res) => res);
+  }
+);
 
 const rehabillitationActionsAsync = {
   getRehabillitationsAsync,
-  // getFilteredRehabillitationAsync,
+  getFilteredRehabillitationAsync,
 };
 
 export default rehabillitationActionsAsync;
