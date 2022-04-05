@@ -19,7 +19,7 @@ function RehabillitationScreen({}: RootTabScreenProps<'Rehabillitation'>) {
     if (!rehabilitationExercises.length) {
       dispatch(AsyncActions.getRehabillitationsAsync());
     }
-  }, [dispatch,rehabilitationExercises]);
+  }, [dispatch]);
 
   return (
     <View style={styles.container}>
