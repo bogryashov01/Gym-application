@@ -36,8 +36,9 @@ function GymScreen({ navigation }: GymScreenProps<'Gym'>) {
           return (
             <Pressable
               onPress={() => navigation.navigate('GymExerciseScreen', { id: exercise.id })}
+              key={index}
             >
-              <View key={index} style={styles.gymExercise}>
+              <View style={styles.gymExercise}>
                 <Image source={{ uri: `${exercise.imageUrl}` }} style={{ width: 30, height: 30 }} />
                 <Text style={styles.title}>{exercise.name}</Text>
               </View>
