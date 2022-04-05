@@ -1,6 +1,6 @@
 // Modules
 import { useEffect } from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, Pressable } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import map from 'lodash/map';
 
@@ -11,7 +11,10 @@ import { Text, View } from '../components/Themed';
 import gymActionsAsync from '../engine/gym/async-actions';
 import gymTabSelectors from '../engine/gym/selectors';
 
-function Gym() {
+// Types
+import { GymScreenProps } from '../types';
+
+function GymScreen({ navigation }: GymScreenProps<'Gym'>) {
   const dispatch = useDispatch();
   const gymExercise = useSelector(gymTabSelectors.gymExercise);
 
@@ -31,10 +34,14 @@ function Gym() {
       ) : (
         map(gymExercise, (exercise: any, index: number) => {
           return (
-            <View key={index} style={styles.gymExercise}>
-              <Image source={{ uri: `${exercise.imageUrl}` }} style={{ width: 30, height: 30 }} />
-              <Text style={styles.title}>{exercise.name}</Text>
-            </View>
+            <Pressable
+              onPress={() => navigation.navigate('GymExerciseScreen', { id: exercise.id })}
+            >
+              <View key={index} style={styles.gymExercise}>
+                <Image source={{ uri: `${exercise.imageUrl}` }} style={{ width: 30, height: 30 }} />
+                <Text style={styles.title}>{exercise.name}</Text>
+              </View>
+            </Pressable>
           );
         })
       )}
@@ -73,4 +80,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Gym;
+export default GymScreen;

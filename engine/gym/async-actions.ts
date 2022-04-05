@@ -44,10 +44,24 @@ const getFilteredGymExerciseAsync = createAsyncThunk(
     }).then((res) => res);
   },
 );
+const getGymExerciseByIdAsync = createAsyncThunk('gym/getGymExerciseById', async (id: number) => {
+  return new Promise((res) => {
+    setTimeout(() => {
+      res(
+        mockGymExercise.filter((exercise) => {
+          if (exercise.id === id) {
+            return exercise;
+          } else null;
+        }),
+      );
+    }, 100);
+  }).then((res) => res);
+});
 
 const gymActionsAsync = {
   getGymExerciseAsync,
   getFilteredGymExerciseAsync,
+  getGymExerciseByIdAsync,
 };
 
 export default gymActionsAsync;

@@ -4,10 +4,11 @@ import { createSlice } from '@reduxjs/toolkit';
 // Actions
 import asyncActions from './async-actions';
 
-const { getGymExerciseAsync, getFilteredGymExerciseAsync } = asyncActions;
+const { getGymExerciseAsync, getFilteredGymExerciseAsync, getGymExerciseByIdAsync } = asyncActions;
 
 const initialState = {
   gymExercise: [],
+  currentExercise: null,
   pending: false,
 };
 
@@ -38,6 +39,16 @@ const gymTabSlice = createSlice({
         (state: { pending: boolean; gymExercise: Array<any>[any] }, action) => {
           state.pending = false;
           state.gymExercise = action.payload;
+        },
+      )
+      .addCase(getGymExerciseByIdAsync.pending, (state: { pending: boolean }) => {
+        state.pending = true;
+      })
+      .addCase(
+        getGymExerciseByIdAsync.fulfilled,
+        (state: { pending: boolean; currentExercise: any }, action) => {
+          state.pending = false;
+          state.currentExercise = action.payload;
         },
       );
   },
