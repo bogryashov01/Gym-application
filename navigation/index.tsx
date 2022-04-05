@@ -15,16 +15,18 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import RehabillitationScreen from '../screens/RehabillitationScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import GymScreen from '../screens/GymScreen';
+import GymExerciseScreen from '../screens/GymExerciseScreen';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+    >
       <RootNavigator />
     </NavigationContainer>
   );
@@ -41,6 +43,7 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+      <Stack.Screen name="GymExerciseScreen" component={GymExerciseScreen} initialParams={{ id: 42 }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
@@ -59,22 +62,24 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="Rehabitation"
+      initialRouteName="Rehabillitation"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
-      }}>
+      }}
+    >
       <BottomTab.Screen
-        name="Rehabitation"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'Rehabitation'>) => ({
-          title: 'Rehabitation',
+        name="Rehabillitation"
+        component={RehabillitationScreen}
+        options={({ navigation }: RootTabScreenProps<'Rehabillitation'>) => ({
+          title: 'Rehabillitation',
           tabBarIcon: ({ color }) => <TabBarIcon name="medkit" color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
-              })}>
+              })}
+            >
               <FontAwesome
                 name="info-circle"
                 size={25}
@@ -83,18 +88,38 @@ function BottomTabNavigator() {
               />
             </Pressable>
           ),
-          headerLeft: () =>(
-            <SearchInput/>
+          headerLeft: () => (
+            // TODO: create more interesting variant
+            <SearchInput mainPage={true} />
           ),
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
-        options={{
-          title: 'Tab Two',
+        name="Gym"
+        component={GymScreen}
+        options={({ navigation }: RootTabScreenProps<'Gym'>) => ({
+          title: 'Gym',
           tabBarIcon: ({ color }) => <TabBarIcon name="superpowers" color={color} />,
-        }}
+          headerRight: () => (
+            <Pressable
+              onPress={() => navigation.navigate('Modal')}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <FontAwesome
+                name="info-circle"
+                size={25}
+                color={Colors[colorScheme].text}
+                style={{ marginRight: 15 }}
+              />
+            </Pressable>
+          ),
+          headerLeft: () => (
+            // TODO: create more interesting variant
+            <SearchInput mainPage={false} />
+          ),
+        })}
       />
     </BottomTab.Navigator>
   );

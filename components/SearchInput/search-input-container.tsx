@@ -1,16 +1,18 @@
 // Modules
-import { useState } from "react";
-import { useColorScheme } from "react-native";
-import { useDispatch } from "react-redux";
+import { useState } from 'react';
+import { useColorScheme } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 // Components
-import SearchInput from "./search-input";
+import SearchInput from './search-input';
 
 // Engine
-import AsyncActions from '../../engine/rehabilitation/async-actions'
+import rehabillitationAsyncActions from '../../engine/rehabilitation/async-actions';
+import gymAsyncActions from '../../engine/gym/async-actions';
 
-function SearchInputContainer() {
-  const [value, setValue] = useState("");
+function SearchInputContainer(props) {
+  const { mainPage } = props;
+  const [value, setValue] = useState('');
   const colorScheme = useColorScheme();
   const dispatch = useDispatch();
 
@@ -18,9 +20,13 @@ function SearchInputContainer() {
     setValue(e);
   };
   const onSubmitEditing = () => {
-    dispatch(AsyncActions.getFilteredRehabillitationAsync(value))
-    console.log(value, 'value')
-  }
+    // TODO: create more interesting variant
+    if (mainPage) {
+      dispatch(rehabillitationAsyncActions.getFilteredRehabillitationAsync(value));
+    } else {
+      dispatch(gymAsyncActions.getFilteredGymExerciseAsync(value));
+    }
+  };
 
   return (
     <SearchInput
