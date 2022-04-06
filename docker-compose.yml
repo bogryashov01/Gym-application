@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  db:
+    image: mariadb:10.4.8
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root_password
+      MYSQL_DATABASE: mydb
+      MYSQL_ROOT_PASSWORD: root_password
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci', '--bind-address=0.0.0.0']
