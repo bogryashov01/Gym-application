@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { mockGymExercise } from '../../constants/mockGymExercise';
 
-const getGymExerciseAsync = createAsyncThunk('gym/get-gymExercise', async () => {
+const getGymExerciseAsync = createAsyncThunk('/get-gym-exercise', async () => {
   return new Promise((res) => {
     setTimeout(() => {
       res([
