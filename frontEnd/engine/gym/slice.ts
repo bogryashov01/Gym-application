@@ -25,7 +25,7 @@ const gymTabSlice = createSlice({
         getGymExerciseAsync.fulfilled,
         (state: { pending: boolean; gymExercise: Array<any>[any] }, action) => {
           state.pending = false;
-          state.gymExercise = action.payload;
+          state.gymExercise = action.payload?.rows;
         },
       )
       .addCase(getGymExerciseAsync.rejected, (state) => {

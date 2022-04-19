@@ -1,30 +1,21 @@
 // Modules
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+// Constants
 import { mockGymExercise } from '../../constants/mockGymExercise';
 
-const getGymExerciseAsync = createAsyncThunk('/get-gym-exercise', async () => {
-  return new Promise((res) => {
-    setTimeout(() => {
-      res([
-        {
-          id: 1,
-          name: 'Push up',
-          imageUrl: 'https://reactjs.org/logo-og.png',
-          descriptions: 'Push ups',
-          shortDesctiption: 'short Description',
-        },
-        {
-          id: 2,
-          name: 'body lifting',
-          imageUrl: 'https://reactjs.org/logo-og.png',
-          descriptions: 'body lifting',
-          shortDesctiption: 'body lifting',
-        },
-      ]);
-    }, 700);
-  }).then((res) => res);
-});
+const getGymExerciseAsync = createAsyncThunk(
+  '/get-gym-exercise',
+  async (body, { rejectWithValue }) => {
+    try {
+      const data = await fetch('http://localhost:8000/get-gym-exercise').then((res) => res.json());
+      return data;
+    } catch (err) {
+      console.log('error');
+      return rejectWithValue(err);
+    }
+  },
+);
 
 const getFilteredGymExerciseAsync = createAsyncThunk(
   'gym/filter-gymExercise',

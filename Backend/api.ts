@@ -18,6 +18,7 @@ app.get('/get-gym-exercise', async (req, res) => {
     res.status(500).json({ err });
   }
 });
+
 app.get('/get-rehabillitation-exercise', async (req, res) => {
   try {
     const query = db.query('SELECT * FROM rehabillitation');
