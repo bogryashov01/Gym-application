@@ -1,6 +1,6 @@
 // Modules
 import { useEffect } from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, Pressable } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import map from 'lodash/map';
 
@@ -11,7 +11,7 @@ import { RootTabScreenProps } from '../types';
 import AsyncActions from '../engine/rehabilitation/async-actions';
 import rehabillitationTabSelectors from '../engine/rehabilitation/selectors';
 
-function RehabillitationScreen({}: RootTabScreenProps<'Rehabillitation'>) {
+function RehabillitationScreen({ navigation }: RootTabScreenProps<'Rehabillitation'>) {
   const dispatch = useDispatch();
   const rehabilitationExercises = useSelector(rehabillitationTabSelectors.rehabillitations);
 
@@ -29,12 +29,17 @@ function RehabillitationScreen({}: RootTabScreenProps<'Rehabillitation'>) {
           <Text style={styles.title}>Please refresh application</Text>
         </View>
       ) : (
-        map(rehabilitationExercises, (exercise: any, index: number) => {
+        map(rehabilitationExercises, (exercise: any) => {
           return (
-            <View key={index} style={styles.exercise}>
-              <Text style={styles.title}>{exercise.name}</Text>
-              <Image source={{ uri: `${exercise.imageUrl}` }} style={{ width: 30, height: 30 }} />
-            </View>
+            <Pressable
+              onPress={() => navigation.navigate('RehabillitationExercise', { id: exercise.id })}
+              key={exercise.id}
+            >
+              <View key={exercise.id} style={styles.exercise}>
+                <Text style={styles.title}>{exercise.name}</Text>
+                <Image source={{ uri: `${exercise.imageUrl}` }} style={{ width: 30, height: 30 }} />
+              </View>
+            </Pressable>
           );
         })
       )}

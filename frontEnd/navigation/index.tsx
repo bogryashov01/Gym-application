@@ -20,6 +20,7 @@ import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../typ
 import LinkingConfiguration from './LinkingConfiguration';
 import GymScreen from '../screens/GymScreen';
 import GymExerciseScreen from '../screens/GymExerciseScreen';
+import RehabillitationExerciseScreen from '../screens/RehabillitationExerciseScreen';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -43,7 +44,16 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Screen name="GymExerciseScreen" component={GymExerciseScreen} initialParams={{ id: 42 }} />
+      <Stack.Screen
+        name="GymExerciseScreen"
+        component={GymExerciseScreen}
+        initialParams={{ id: 42 }}
+      />
+      <Stack.Screen
+        name="RehabillitationExercise"
+        component={RehabillitationExerciseScreen}
+        initialParams={{ id: 42 }}
+      />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>

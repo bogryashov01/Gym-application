@@ -17,7 +17,7 @@ const linking: LinkingOptions<RootStackParamList> = {
         screens: {
           Rehabillitation: {
             screens: {
-              Rehabitation: 'Rehabillitation',
+              Rehabillitation: 'Rehabillitation',
             },
           },
           Gym: {
@@ -28,6 +28,11 @@ const linking: LinkingOptions<RootStackParamList> = {
           GymExerciseScreen: {
             screens: {
               GymExerciseScreen: 'GymExerciseScreen',
+            },
+          },
+          RehabillitationExercise: {
+            screens: {
+              RehabillitationExercise: 'RehabillitationExercise',
             },
           },
         },

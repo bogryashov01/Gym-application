@@ -1,57 +1,45 @@
 // Modules
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 // Actions
-import asyncActions from "./async-actions";
+import asyncActions from './async-actions';
 
-const { getRehabillitationsAsync, getFilteredRehabillitationAsync } =
-  asyncActions;
+const { getRehabillitationsAsync, getCurrentRehabillitationAsync } = asyncActions;
 
 const initialState = {
+  currentExercise: null,
   rehabillitations: [],
   pending: false,
 };
 
 const rehabillitationTabSlice = createSlice({
-  name: "rehabillitationTab",
+  name: 'rehabillitationTab',
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(
-        getRehabillitationsAsync.pending,
-        (state: { pending: boolean }) => {
-          state.pending = true;
-        }
-      )
+      .addCase(getRehabillitationsAsync.pending, (state: { pending: boolean }) => {
+        state.pending = true;
+      })
       .addCase(
         getRehabillitationsAsync.fulfilled,
-        (
-          state: { pending: boolean; rehabillitations: Array<any>[any] },
-          action
-        ) => {
+        (state: { pending: boolean; rehabillitations: Array<any>[any] }, action) => {
           state.pending = false;
-          state.rehabillitations = action.payload;
-        }
+          state.rehabillitations = action.payload?.rows;
+        },
       )
       .addCase(getRehabillitationsAsync.rejected, (state) => {
         state.pending = false;
       })
+      .addCase(getCurrentRehabillitationAsync.pending, (state: { pending: boolean }) => {
+        state.pending = true;
+      })
       .addCase(
-        getFilteredRehabillitationAsync.pending,
-        (state: { pending: boolean }) => {
-          state.pending = true;
-        }
-      )
-      .addCase(
-        getFilteredRehabillitationAsync.fulfilled,
-        (
-          state: { pending: boolean; rehabillitations: Array<any>[any] },
-          action
-        ) => {
+        getCurrentRehabillitationAsync.fulfilled,
+        (state: { pending: boolean; currentExercise: any }, action) => {
           state.pending = false;
-          state.rehabillitations = action.payload;
-        }
+          state.currentExercise = action.payload?.rows;
+        },
       );
   },
 });

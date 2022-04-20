@@ -1,76 +1,39 @@
 // Modules
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { mockExercise } from '../../constants/mockExercise';
-
 const getRehabillitationsAsync = createAsyncThunk(
-  'rehabillitation/get-rehabillitation',
-  async () => {
-    return new Promise((res) => {
-      setTimeout(() => {
-        res([
-          {
-            id: 1,
-            name: 'Knee to chest',
-            imageUrl: 'https://reactjs.org/logo-og.png',
-            descriptions: [
-              {
-                description1: 'Lie on your back with your knees bent and feet flat on the floor.',
-              },
-              {
-                description2:
-                  'Bring one knee to your chest, helping yourself with the hands under your thigh.',
-              },
-              {
-                description3: 'Return to the starting position and repeat with the same leg.',
-              },
-            ],
-          },
-          {
-            id: 2,
-            name: 'Knee to arm',
-            imageUrl: 'https://reactjs.org/logo-og.png',
-            descriptions: [
-              {
-                description1: 'Lie on your back with your knees bent and feet flat on the floor.',
-              },
-              {
-                description2:
-                  'Bring one knee to your chest, helping yourself with the hands under your thigh.',
-              },
-              {
-                description3: 'Return to the starting position and repeat with the same leg.',
-              },
-            ],
-          },
-        ]);
-      }, 700);
-    }).then((res) => res);
+  '/get-rehabillitation-exercise',
+  async (body, { rejectWithValue }) => {
+    try {
+      const data = await fetch('http://localhost:8000/get-rehabillitation-exercise').then((res) =>
+        res.json(),
+      );
+      return data;
+    } catch (err) {
+      console.log('error');
+      return rejectWithValue(err);
+    }
   },
 );
 
-const getFilteredRehabillitationAsync = createAsyncThunk(
-  'rehabillitation/filter-rehabillitation',
-  async (name: any) => {
-    return new Promise((res) => {
-      setTimeout(() => {
-        res(
-          mockExercise.filter((exercise) => {
-            if (name === '') {
-              return exercise;
-            } else if (exercise.name.toLowerCase().includes(name.toLowerCase())) {
-              return exercise;
-            }
-          }),
-        );
-      }, 100);
-    }).then((res) => res);
+const getCurrentRehabillitationAsync = createAsyncThunk(
+  '/get-current-rehabillitation-exercise',
+  async (id: number, { rejectWithValue }) => {
+    try {
+      const data = await fetch(`http://localhost:8000/get-rehabillitation-exercise/${id}`).then(
+        (res) => res.json(),
+      );
+      return data;
+    } catch (err) {
+      console.log('error');
+      return rejectWithValue(err);
+    }
   },
 );
 
 const rehabillitationActionsAsync = {
   getRehabillitationsAsync,
-  getFilteredRehabillitationAsync,
+  getCurrentRehabillitationAsync,
 };
 
 export default rehabillitationActionsAsync;

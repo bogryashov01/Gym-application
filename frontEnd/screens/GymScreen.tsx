@@ -32,11 +32,11 @@ function GymScreen({ navigation }: GymScreenProps<'Gym'>) {
           <Text style={styles.title}>Please refresh application</Text>
         </View>
       ) : (
-        map(gymExercise, (exercise: any, index: number) => {
+        map(gymExercise, (exercise: any) => {
           return (
             <Pressable
               onPress={() => navigation.navigate('GymExerciseScreen', { id: exercise.id })}
-              key={index}
+              key={exercise.id}
             >
               <View style={styles.gymExercise}>
                 <Image source={{ uri: `${exercise.imageUrl}` }} style={{ width: 30, height: 30 }} />

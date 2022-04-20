@@ -18,6 +18,7 @@ export type RootStackParamList = {
   Modal: undefined;
   NotFound: undefined;
   GymExerciseScreen: { id: number };
+  RehabillitationExercise: { id: number };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
@@ -29,6 +30,7 @@ export type RootTabParamList = {
   Rehabillitation: undefined;
   Gym: undefined;
   GymExerciseScreen: { id: number };
+  RehabillitationExercise: { id: number };
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
@@ -40,3 +42,9 @@ export type GymScreenProps<Screen extends keyof RootTabParamList> = CompositeScr
   BottomTabScreenProps<RootTabParamList, Screen>,
   NativeStackScreenProps<RootStackParamList>
 >;
+
+export type RehabillitationScreenProps<Screen extends keyof RootTabParamList> =
+  CompositeScreenProps<
+    BottomTabScreenProps<RootTabParamList, Screen>,
+    NativeStackScreenProps<RootStackParamList>
+  >;
