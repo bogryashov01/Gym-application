@@ -17,6 +17,7 @@ function RehabillitationScreen({ navigation }: RootTabScreenProps<'Rehabillitati
 
   useEffect(() => {
     if (!rehabilitationExercises.length) {
+      console.log(rehabilitationExercises);
       dispatch(AsyncActions.getRehabillitationsAsync());
     }
   }, [dispatch]);

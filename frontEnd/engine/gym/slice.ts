@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 // Actions
 import asyncActions from './async-actions';
 
-const { getGymExerciseAsync, getFilteredGymExerciseAsync, getGymExerciseByIdAsync } = asyncActions;
+const { getGymExerciseAsync, getFilteredGymAsync, getCurrentGymExerciseAsync } = asyncActions;
 
 const initialState = {
   gymExercise: [],
@@ -31,24 +31,24 @@ const gymTabSlice = createSlice({
       .addCase(getGymExerciseAsync.rejected, (state) => {
         state.pending = false;
       })
-      .addCase(getFilteredGymExerciseAsync.pending, (state: { pending: boolean }) => {
+      .addCase(getFilteredGymAsync.pending, (state: { pending: boolean }) => {
         state.pending = true;
       })
       .addCase(
-        getFilteredGymExerciseAsync.fulfilled,
+        getFilteredGymAsync.fulfilled,
         (state: { pending: boolean; gymExercise: Array<any>[any] }, action) => {
           state.pending = false;
-          state.gymExercise = action.payload;
+          state.gymExercise = action.payload?.rows;
         },
       )
-      .addCase(getGymExerciseByIdAsync.pending, (state: { pending: boolean }) => {
+      .addCase(getCurrentGymExerciseAsync.pending, (state: { pending: boolean }) => {
         state.pending = true;
       })
       .addCase(
-        getGymExerciseByIdAsync.fulfilled,
+        getCurrentGymExerciseAsync.fulfilled,
         (state: { pending: boolean; currentExercise: any }, action) => {
           state.pending = false;
-          state.currentExercise = action.payload;
+          state.currentExercise = action.payload?.rows;
         },
       );
   },

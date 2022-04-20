@@ -51,6 +51,28 @@ app.get('/get-rehabillitation-exercise/:id', async (req, res) => {
   }
 });
 
+app.get('/get-search-rehabillitation/:name', async (req, res) => {
+  const { name } = req.params;
+  try {
+    const query = db.query(`SELECT * FROM rehabillitation WHERE name LIKE '%${name}%'`);
+    const data = await query;
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
+
+app.get('/get-search-gym/:name', async (req, res) => {
+  const { name } = req.params;
+  try {
+    const query = db.query(`SELECT * FROM gym WHERE name LIKE '%${name}%'`);
+    const data = await query;
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
+
 app.listen(8000, () => {
   console.log('Example app listening on port 8000!');
 });

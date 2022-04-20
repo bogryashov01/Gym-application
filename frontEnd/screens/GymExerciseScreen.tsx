@@ -20,7 +20,7 @@ function GymExerciseScreen({ route }: RootTabScreenProps<'GymExerciseScreen'>) {
   const pending = useSelector(gymTabSelectors.pending);
 
   useEffect(() => {
-    dispacth(gymActionsAsync.getGymExerciseByIdAsync(route.params.id));
+    dispacth(gymActionsAsync.getCurrentGymExerciseAsync(route.params.id));
   }, [dispacth]);
 
   return (

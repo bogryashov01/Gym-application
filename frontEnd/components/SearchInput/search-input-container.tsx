@@ -24,7 +24,7 @@ function SearchInputContainer(props) {
     if (mainPage) {
       dispatch(rehabillitationAsyncActions.getFilteredRehabillitationAsync(value));
     } else {
-      dispatch(gymAsyncActions.getFilteredGymExerciseAsync(value));
+      dispatch(gymAsyncActions.getFilteredGymAsync(value));
     }
   };
 
