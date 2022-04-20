@@ -66,6 +66,7 @@ app.get('/get-search-gym/:name', async (req, res) => {
   const { name } = req.params;
   try {
     const query = db.query(`SELECT * FROM gym WHERE name LIKE '%${name}%'`);
+    
     const data = await query;
     res.json(data);
   } catch (err) {
